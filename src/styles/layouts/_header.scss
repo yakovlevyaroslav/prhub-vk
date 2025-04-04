@@ -1,0 +1,51 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.header {
+  background-color: white;
+  box-shadow: $shadow-base;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav {
+  @include flex-between;
+  height: 80px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+.nav-list {
+  display: flex;
+  gap: $spacing-large;
+
+  a {
+    font-weight: 500;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+@include responsive(mobile) {
+  .nav {
+    flex-direction: column;
+    height: auto;
+    padding: $spacing-base 0;
+  }
+
+  .nav-list {
+    margin-top: $spacing-base;
+    flex-direction: column;
+    text-align: center;
+    gap: $spacing-base;
+  }
+} 
