@@ -113,4 +113,118 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Инициализация попапа с историями
+  const storiesPopup = document.querySelector('.stories-popup');
+  const storiesPopupClose = document.querySelector('.stories-popup__close');
+  const storiesPopupSlider = document.querySelector('.stories-popup__slider');
+  let storiesPopupSwiper = null;
+
+  // Функция для открытия попапа
+  function openStoriesPopup(index) {
+    // Создаем слайдер, если он еще не создан
+    if (!storiesPopupSwiper) {
+      storiesPopupSwiper = new Swiper(storiesPopupSlider, {
+        modules: [Navigation],
+        slidesPerView: 1,
+        spaceBetween: 0,
+        allowTouchMove: true,
+        grabCursor: true,
+        initialSlide: index,
+        autoHeight: false,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        navigation: {
+          nextEl: '.stories-popup__slider-button_next',
+          prevEl: '.stories-popup__slider-button_prev',
+        },
+      });
+    } else {
+      // Если слайдер уже существует, просто переходим к нужному слайду
+      storiesPopupSwiper.slideTo(index);
+    }
+    
+    // Показываем попап
+    storiesPopup.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+  }
+
+  // Функция для закрытия попапа
+  function closeStoriesPopup() {
+    storiesPopup.classList.remove('active');
+    document.body.style.overflow = ''; // Разблокируем скролл страницы
+  }
+
+  // Обработчик клика по кнопке закрытия
+  if (storiesPopupClose) {
+    storiesPopupClose.addEventListener('click', closeStoriesPopup);
+  }
+
+  // Обработчик клика по оверлею для закрытия попапа
+  const storiesPopupOverlay = document.querySelector('.stories-popup__overlay');
+  if (storiesPopupOverlay) {
+    storiesPopupOverlay.addEventListener('click', closeStoriesPopup);
+  }
+
+  // Обработчик клика по кнопкам "Читать историю"
+  const storyButtons = document.querySelectorAll('.stories__card-btn');
+  if (storyButtons.length > 0) {
+    // Собираем данные из всех карточек
+    const storiesData = [];
+    const storyCards = document.querySelectorAll('.stories__card');
+    
+    storyCards.forEach((card, index) => {
+      const badge = card.querySelector('.stories__card-badge');
+      const badgeType = card.querySelector('.stories__card-badge-type');
+      const image = card.querySelector('.stories__card-image img');
+      const title = card.querySelector('.stories__card-title');
+      const text = card.querySelector('.stories__card-text');
+      
+      storiesData.push({
+        badge: badge ? badge.textContent.replace(badgeType ? badgeType.textContent : '', '').trim() : '',
+        badgeType: badgeType ? badgeType.textContent : '',
+        image: image ? image.src : '',
+        title: title ? title.textContent : '',
+        text: text ? text.textContent : ''
+      });
+    });
+    
+    // Создаем слайды для попапа
+    const storiesPopupWrapper = document.querySelector('.stories-popup__slider .swiper-wrapper');
+    
+    storiesData.forEach((story, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      
+      slide.innerHTML = `
+        <div class="stories-popup__card">
+          <div class="stories-popup__card-image">
+            <img src="${story.image}" alt="${story.title}">
+            <div class="stories-popup__card-info">
+              <div class="stories-popup__card-names">
+              ${story.title}
+              </div>
+              <div class="stories-popup__card-badge">
+              ${story.badge}
+              </div>
+              <span class="stories-popup__card-badge-type">${story.badgeType}</span>
+            </div>
+          </div>
+          <div class="stories-popup__card-content">
+            <div class="stories-popup__card-title">История любви</div>
+            <div class="stories-popup__card-text">${story.text}</div>
+          </div>
+        </div>
+      `;
+      
+      storiesPopupWrapper.appendChild(slide);
+    });
+    
+    // Добавляем обработчики для кнопок
+    storyButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        openStoriesPopup(index);
+      });
+    });
+  }
 }); 
