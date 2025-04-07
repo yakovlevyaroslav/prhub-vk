@@ -1,0 +1,41 @@
+@use '../utils/variables' as *;
+
+.start {
+  width: 100%;
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('../../assets/bg_main.jpg');
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 16px;
+
+    &-top {
+      background-image: url('../../assets/icon_vk-znakomstva-text.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 240px;
+      height: 36px;
+    }
+
+    &-subtitle {
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    &-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+  }
+}

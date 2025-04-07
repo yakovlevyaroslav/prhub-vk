@@ -36,16 +36,20 @@
 }
 
 @mixin button-base {
-  padding: $spacing-base $spacing-large;
+  padding: 16px 24px;
   border: none;
-  border-radius: $border-radius-base;
+  border-radius: 16px;
   font-size: $font-size-base;
   font-weight: 500;
   cursor: pointer;
   transition: transform $transition-base, box-shadow $transition-base;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-hover;
-  }
+  // &:hover {
+  //   transform: translateY(-2px);
+  //   box-shadow: $shadow-hover;
+  // }
 } 

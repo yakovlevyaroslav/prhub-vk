@@ -53,8 +53,24 @@ module.exports = {
         use: [
           isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          },
         ],
       },
       {
@@ -63,6 +79,17 @@ module.exports = {
         generator: {
           filename: 'assets/[name].[hash][ext]',
         },
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              sources: true,
+            }
+          }
+        ]
       },
     ],
   },
@@ -75,4 +102,14 @@ module.exports = {
       filename: 'css/[name].[contenthash].css',
     }),
   ],
+  resolve: {
+    alias: {
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      'assets': path.resolve(__dirname, 'src/assets'),
+    },
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, './')
+    ]
+  },
 }; 

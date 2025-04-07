@@ -6,74 +6,282 @@
     <title>PRHub VK</title>
   </head>
   <body>
-    <div class="page-wrapper">
-      <header class="header">
+    <main>
+      <section class="start">
         <div class="container">
-          <nav class="nav">
-            <div class="logo">PRHub</div>
-            <ul class="nav-list">
-              <li><a href="#features">Возможности</a></li>
-              <li><a href="#about">О нас</a></li>
-              <li><a href="#contact">Контакты</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <main class="main-content">
-        <section class="hero section">
-          <div class="container">
-            <h1>PRHub VK</h1>
-            <p class="hero-text">Ваш надежный партнер в мире PR и маркетинга ВКонтакте</p>
-            <button class="btn btn-primary">Начать работу</button>
+          <div class="start__content">
+            <div class="start__content-top"></div>
+            <h1 class="title">
+              Эти пары нашли друг друга, <br>
+              и их не найти VK Знакомствах
+            </h1>
+            <h2 class="start__content-subtitle subtitle">
+              Но там есть ещё миллионы пользователей!
+            </h2>
+            <div class="start__content-bottom">
+              <div class="btn btn-white">Учавствовать</div>
+              <div class="btn btn-stroke">Проголосовать за лучшую историю</div>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="features" class="features section">
-          <div class="container">
-            <h2>Наши возможности</h2>
-            <div class="grid grid--3-cols">
-              <div class="feature-card">
-                <h3>Аналитика</h3>
-                <p>Подробный анализ вашей аудитории и эффективности постов</p>
-              </div>
-              <div class="feature-card">
-                <h3>Автопостинг</h3>
-                <p>Автоматизация публикации контента в удобное время</p>
-              </div>
-              <div class="feature-card">
-                <h3>Мониторинг</h3>
-                <p>Отслеживание упоминаний и активности в сообществе</p>
+      <section class="stories">
+        <div class="stories__content">
+          <h2 class="stories__content-title title">
+            Истории любви
+          </h2>
+          <div class="stories__slider">
+            <div class="stories__slider-button_next"></div>
+            <div class="stories__slider-button_prev"></div>
+            <div class="stories__cards swiper">
+              <div class="swiper-wrapper">
+                <div class="stories__card swiper-slide">
+                  <div class="stories__card-badge">
+                    Нашли мэтч по <span class="stories__card-badge-type">Ценят искусство</span>
+                  </div>
+                  <div class="stories__card-image">
+                    <img src="../src/assets/image_card.jpg" alt="Алина и Игорь">
+                  </div>
+                  <div class="stories__card-title">
+                    Алина и Игорь 1
+                  </div>
+                  <div class="stories__card-text">
+                    Краткое описание любовной истории пары, в некоторых подробностях с частью деталей о самой паре
+                  </div>
+                  <button class="btn btn-blue stories__card-btn">
+                    Читать историю
+                  </button>
+                </div>
+                <div class="stories__card swiper-slide">
+                  <div class="stories__card-badge">
+                    Нашли мэтч по <span class="stories__card-badge-type">Ценят искусство</span>
+                  </div>
+                  <div class="stories__card-image">
+                    <img src="../src/assets/image_card.jpg" alt="Алина и Игорь">
+                  </div>
+                  <div class="stories__card-title">
+                    Алина и Игорь 2
+                  </div>
+                  <div class="stories__card-text">
+                    Краткое описание любовной истории пары, в некоторых подробностях с частью деталей о самой паре
+                  </div>
+                  <button class="btn btn-blue stories__card-btn">
+                    Читать историю
+                  </button>
+                </div>
+                <div class="stories__card swiper-slide">
+                  <div class="stories__card-badge">
+                    Нашли мэтч по <span class="stories__card-badge-type">Ценят искусство</span>
+                  </div>
+                  <div class="stories__card-image">
+                    <img src="../src/assets/image_card.jpg" alt="Алина и Игорь">
+                  </div>
+                  <div class="stories__card-title">
+                    Алина и Игорь 3
+                  </div>
+                  <div class="stories__card-text">
+                    Краткое описание любовной истории пары, в некоторых подробностях с частью деталей о самой паре
+                  </div>
+                  <button class="btn btn-blue stories__card-btn">
+                    Читать историю
+                  </button>
+                </div>
+                <div class="stories__card swiper-slide">
+                  <div class="stories__card-badge">
+                    Нашли мэтч по <span class="stories__card-badge-type">Ценят искусство</span>
+                  </div>
+                  <div class="stories__card-image">
+                    <img src="../src/assets/image_card.jpg" alt="Алина и Игорь">
+                  </div>
+                  <div class="stories__card-title">
+                    Алина и Игорь 4
+                  </div>
+                  <div class="stories__card-text">
+                    Краткое описание любовной истории пары, в некоторых подробностях с частью деталей о самой паре
+                  </div>
+                  <button class="btn btn-blue stories__card-btn">
+                    Читать историю
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-
-        <section id="about" class="about section">
-          <div class="container">
-            <h2>О нас</h2>
-            <p>Мы помогаем бизнесу развиваться в социальных сетях с 2020 года. Наша команда экспертов создает эффективные PR-стратегии и реализует их.</p>
+          <div class="stories__collections">
+            <div class="stories__collections-text">
+              <h2 class="title">
+                Смотрите подборки <br>
+                по интересам
+              </h2>
+              <div class="stories__collections-subtitle subtitle">
+                Переходите в VK Знакомства, чтобы найти свой мэтч по интересам, и мы рассказали уже о вашей истории 💕
+              </div>
+              <div class="stories__collections-arrow"></div>
+            </div>
+            <div class="stories__collections-list">
+              <div class="stories__collections-item stories__card-badge-type">Отдыхают активно</div>
+              <div class="stories__collections-item stories__card-badge-type">Ценят легкость</div>
+              <div class="stories__collections-item stories__card-badge-type">Знают толк в еде</div>
+              <div class="stories__collections-item stories__card-badge-type">Любят музыку</div>
+              <div class="stories__collections-item stories__card-badge-type">Смотрят кино</div>
+              <div class="stories__collections-item stories__card-badge-type">Ценят искусство</div>
+              <div class="stories__collections-item stories__card-badge-type">Любят тусовки</div>
+              <div class="stories__collections-item stories__card-badge-type">Ценят легкость</div>
+              <div class="stories__collections-item stories__card-badge-type">Создают красоту</div>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="contact" class="contact section">
-          <div class="container">
-            <h2>Свяжитесь с нами</h2>
-            <form class="contact-form">
-              <input type="text" placeholder="Ваше имя" required>
-              <input type="email" placeholder="Email" required>
-              <textarea placeholder="Ваше сообщение" required></textarea>
-              <button type="submit" class="btn btn-primary">Отправить</button>
+      <section class="vote">
+        <div class="container">
+          <div class="vote__content">
+            <h2 class="title">
+              Голосуйте за лучшую историю
+            </h2>
+            <div class="vote__content-subtitle subtitle">
+              Войдите в свой профиль VK, чтобы отдать свой голос за понравившуюся пару и их историю любви
+            </div>
+            <button class="btn btn-white vote__content-btn">
+              <img class="vote__content-btn-icon" src="../src/assets/icon_vk.svg" alt="VK">
+              Авторизоваться
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="how">
+        <div class="how__container container">
+          <div class="how__content">
+            <h2 class="how__content-title title">
+              Как участвовать
+            </h2>
+            <div class="how__content-subtitle subtitle">
+              Заполните анкету, рассказав историю вашего знакомства и поделитесь ей со всеми
+            </div>
+            <div class="btn btn-blue">
+              Поделиться историей
+            </div>
+          </div>
+          <div class="how__image">
+            <img src="../src/assets/image_iphone.jpg" alt="Как участвовать">
+          </div>
+        </div>
+      </section>
+
+      <section class="history">
+        <div class="container">
+          <div class="history__content">
+            <h2 class="history__title title">
+              Отправить свою <br>
+              историю
+            </h2>
+            <form class="history__form">
+              <div class="history__form-item">
+                <label for="name">Как Вас зовут?</label>
+                <input type="text" id="name" name="name" placeholder="Напишите Ваши имена">
+              </div>
+              <div class="history__form-item">
+                <label for="meet">Когда вы познакомились?</label>
+                <input type="text" id="meet" name="meet" placeholder="Укажите дату вашего знакомства">
+              </div>
+              <div class="history__form-item">
+                <label for="story">Расскажите свою историю?</label>
+                <textarea id="story" name="story" placeholder="Поделитесь своей историей"></textarea>
+              </div>
+              <div class="history__form-item">
+                <label for="photo">Прикрепите фотографии</label>
+                <div class="history__form-file-wrapper">
+                  <input type="file" id="photo" name="photo" class="history__form-file" multiple>
+                  <div class="history__form-file-placeholder">
+                    <div class="history__form-file-icon"></div>
+                    <div class="history__form-file-text">Прикрепить изображение</div>
+                  </div>
+                  <div class="history__form-file-preview"></div>
+                </div>
+              </div>
+              <div class="history__form-item">
+                <button type="submit" class="btn btn-blue history__form-btn">Отправить историю</button>
+              </div>
             </form>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      <section class="download">
+        <div class="container">
+          <h2 class="download__title title">
+            Скачивайте VK Знакомства
+          </h2>
+          <div class="download__subtitle subtitle">
+            В отдельном приложении можно листать анкет <br>
+            и общаться, оставаясь офлайн ВКонтакте
+          </div>
+          <div class="download__list">
+            <a href="#" target="_blank" class="download__item">
+              App Store
+              <img class="download__item-icon" src="../src/assets/icon_share.svg" alt="Link App Store">
+            </a>
+            <a href="#" target="_blank" class="download__item">
+              Google Play
+              <img class="download__item-icon" src="../src/assets/icon_share.svg" alt="Link Google Play">
+            </a>
+            <a href="#" target="_blank" class="download__item">
+              RuStore
+              <img class="download__item-icon" src="../src/assets/icon_share.svg" alt="Link RuStore">
+            </a>
+            <a href="#" target="_blank" class="download__item">
+              Galaxy Store
+              <img class="download__item-icon" src="../src/assets/icon_share.svg" alt="Link Galaxy Store">
+            </a>
+            <a href="#" target="_blank" class="download__item">
+              Huawei AppGalery
+              <img class="download__item-icon" src="../src/assets/icon_share.svg" alt="Link Huawei AppGalery">
+            </a>
+          </div>
+        </div>
+      </section>  
 
       <footer class="footer">
         <div class="container">
-          <p>&copy; 2024 PRHub VK. Все права защищены.</p>
+          <div class="footer__content">
+            <div class="footer__content-col">
+              <div class="footer__content-title title">
+                Социальные сети
+              </div>
+              <div class="footer__content-links">
+                <a href="#" target="_blank" class="footer__content-link">
+                  Лицензионное соглашение
+                </a>
+                <a href="#" target="_blank" class="footer__content-link">
+                  Правила использования
+                </a>
+                <a href="#" target="_blank" class="footer__content-link">
+                  Политика конфиденциальности
+                </a>
+              </div>
+            </div>
+
+            <div class="footer__content-col">
+              <div class="footer__content-social">
+                <a href="#" target="_blank" class="footer__content-social-item">
+                  <img class="footer__content-social-icon" src="../src/assets/icon_vk.svg" alt="VK">
+                </a>
+                <a href="#" target="_blank" class="footer__content-social-item">
+                  <img class="footer__content-social-icon" src="../src/assets/icon_tg.svg" alt="TG">
+                </a>
+                <a href="#" target="_blank" class="footer__content-social-item">
+                  <img class="footer__content-social-icon" src="../src/assets/icon_wa.svg" alt="WhatsApp">
+                </a>
+              </div>
+              <button class="btn btn-stroke footer__content-btn">
+                Наверх
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
-    </div>
+
+    </main>
   </body>
 </html> 

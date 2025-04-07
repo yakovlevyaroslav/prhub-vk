@@ -1,17 +1,22 @@
-// Utils
+@use 'utils/fonts';
 @use 'utils/variables' as *;
 @use 'utils/mixins' as *;
 
 // Base
 @use 'base/reset';
 
-// Layout
-@use 'layouts/layout';
-
 // Components
-@use 'components/buttons';
-@use 'components/cards';
+@use 'components/components';
 
-// Layouts
-@use 'layouts/header';
-@use 'layouts/sections'; 
+// Sections
+@use 'sections/start';
+@use 'sections/stories';
+@use 'sections/vote';
+@use 'sections/how';
+@use 'sections/history';
+@use 'sections/download';
+@use 'sections/footer';
+
+// Swiper styles
+@use 'swiper/css' as *;
+@use 'swiper/css/navigation' as *;
