@@ -22,12 +22,13 @@
     position: relative;
     width: 100%;
     max-width: 1160px;
+    margin-bottom: 120px;
   }
 
   &__cards {
     width: 100%;
     overflow: hidden;
-    
+
     .swiper-wrapper {
       height: auto;
       align-items: stretch;
@@ -45,7 +46,6 @@
     background-color: white;
     border-radius: 16px;
     padding: 16px;
-    margin-bottom: 120px;
     overflow: hidden;
     height: 100%;
     min-height: 0;
