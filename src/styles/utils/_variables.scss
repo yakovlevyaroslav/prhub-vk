@@ -16,8 +16,10 @@ $container-max-width: 1160px;
 $container-padding: 20px;
 
 // Breakpoints
-$breakpoint-mobile: 768px;
-$breakpoint-tablet: 1024px;
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-notebook: 1024px;
+$breakpoint-desktop: 1280px;
 
 // Transitions
 $transition-base: 0.3s ease;

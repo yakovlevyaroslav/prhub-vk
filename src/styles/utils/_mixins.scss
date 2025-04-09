@@ -32,6 +32,14 @@
     @media (max-width: $breakpoint-tablet) {
       @content;
     }
+  } @else if $breakpoint == notebook {
+    @media (max-width: $breakpoint-notebook) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (max-width: $breakpoint-desktop) {
+      @content;
+    }
   }
 }
 

@@ -2,6 +2,7 @@
   "name": "prhub-vk",
   "version": "1.0.0",
   "description": "Landing page for PRHub VK",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack serve",
@@ -39,6 +40,7 @@
     "webpack-dev-server": "^5.2.1"
   },
   "dependencies": {
+    "imask": "^7.6.1",
     "swiper": "^11.2.6"
   }
 }

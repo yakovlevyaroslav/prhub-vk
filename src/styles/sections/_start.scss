@@ -1,5 +1,5 @@
 @use '../utils/variables' as *;
-
+@use '../utils/mixins' as *;
 .start {
   width: 100%;
   min-height: 100vh;
@@ -16,6 +16,10 @@
     height: 100vh;
     gap: 16px;
 
+    @include responsive(mobile) {
+      gap: 12px;
+    }
+
     &-top {
       background-image: url('../../assets/icon_vk-znakomstva-text.svg');
       background-size: contain;
@@ -23,12 +27,30 @@
       background-repeat: no-repeat;
       width: 240px;
       height: 36px;
+
+      @include responsive(mobile) {
+        width: 170px;
+        height: 26px;
+      }
+    }
+
+    &-title {
+      @include responsive(mobile) {
+        br {
+          display: none;
+        }
+      }
     }
 
     &-subtitle {
       font-weight: 500;
       line-height: 1;
       margin-bottom: 16px;
+
+      @include responsive(mobile) {
+        max-width: 280px;
+        margin-bottom: 0;
+      }
     }
 
     &-bottom {
@@ -36,6 +58,10 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
+
+      @include responsive(mobile) {
+        display: none;
+      }
     }
   }
 }

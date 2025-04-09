@@ -1,16 +1,29 @@
 @use '../utils/variables' as *;
+@use '../utils/mixins' as *;
 
 .download {
   padding: 100px 0 120px;
   background-color: $pink-color;
 
+  @include responsive(mobile) {
+    padding: 60px 0;
+  }
+
   &__title {
     margin-bottom: 32px;
     line-height: 1;
+
+    @include responsive(mobile) {
+      margin-bottom: 16px;
+    }
   }
 
   &__subtitle {
     margin-bottom: 62px;
+
+    @include responsive(mobile) {
+      margin-bottom: 32px;
+    }
   }
   
   &__list {
@@ -18,6 +31,10 @@
     flex-direction: column;
     gap: 24px;
     width: 100%;
+
+    @include responsive(mobile) {
+      gap: 16px;
+    }
   }
 
   &__item {
@@ -31,6 +48,11 @@
     font-weight: bold;
     line-height: 1;
 
+    @include responsive(mobile) {
+      font-size: 24px;
+      padding-bottom: 16px;
+    }
+
     &:last-child {
       border-bottom: none;
     }
@@ -38,6 +60,11 @@
     &-icon {
       width: 33px;
       height: 33px;
+
+      @include responsive(mobile) {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 } 
