@@ -18,6 +18,7 @@ export default {
     filename: 'js/[name].[contenthash].js',
     clean: true,
   },
+  devtool: isDevelopment ? 'source-map' : false,
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
@@ -56,7 +57,12 @@ export default {
         test: /\.s[ac]ss$/i,
         use: [
           isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {

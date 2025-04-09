@@ -1,9 +1,11 @@
 import '../styles/main.scss';
 import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
+import './form-handler.js';
 
 // Импортируем изображения явно, чтобы webpack их включил в сборку
-import '../assets/image_card.jpg';
+import '../assets/image_card-1.jpg';
+import '../assets/image_card-2.jpg';
 import '../assets/image_iphone.jpg';
 import '../assets/bg_main.jpg';
 import '../assets/icon_vk-znakomstva-text.svg';
@@ -16,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Инициализация слайдера историй
   const storiesSlider = new Swiper('.stories__cards', {
     modules: [Navigation],
-    slidesPerView: 3,
-    spaceBetween: 20,
+    slidesPerView: 4,
+    spaceBetween: 16,
     autoHeight: false,
     watchSlidesProgress: true,
     watchSlidesVisibility: true,
@@ -28,18 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
     breakpoints: {
       // Когда ширина экрана <= 480px
       320: {
-        slidesPerView: 1,
-        spaceBetween: 10,
+        slidesPerView: 1.2,
+        spaceBetween: 12,
       },
       // Когда ширина экрана <= 980px
       481: {
         slidesPerView: 2,
-        spaceBetween: 25,
+        spaceBetween: 16,
       },
       // Когда ширина экрана > 980px
       981: {
-        slidesPerView: 3,
-        spaceBetween: 40,
+        slidesPerView: 4,
+        spaceBetween: 16,
       },
     },
     on: {
@@ -52,72 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
 
-  // Обработка загрузки файлов
-  const fileInput = document.getElementById('photo');
-  const filePreview = document.querySelector('.history__form-file-preview');
-  const filePlaceholder = document.querySelector('.history__form-file-placeholder');
-
-  if (fileInput) {
-    fileInput.addEventListener('change', function () {
-      filePreview.innerHTML = '';
-
-      if (this.files && this.files.length > 0) {
-        filePlaceholder.style.display = 'none';
-
-        for (let i = 0; i < this.files.length; i++) {
-          const file = this.files[i];
-
-          if (file.type.startsWith('image/')) {
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-              const previewItem = document.createElement('div');
-              previewItem.className = 'history__form-file-preview-item';
-
-              const img = document.createElement('img');
-              img.src = e.target.result;
-              img.alt = 'Превью';
-
-              const removeBtn = document.createElement('div');
-              removeBtn.className = 'history__form-file-preview-item-remove';
-              removeBtn.innerHTML = '×';
-              removeBtn.dataset.index = i;
-
-              removeBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                previewItem.remove();
-
-                // Если все превью удалены, показываем плейсхолдер
-                if (filePreview.children.length === 0) {
-                  filePlaceholder.style.display = 'flex';
-                }
-              });
-
-              previewItem.appendChild(img);
-              previewItem.appendChild(removeBtn);
-              filePreview.appendChild(previewItem);
-            };
-
-            reader.readAsDataURL(file);
-          }
-        }
-      } else {
-        filePlaceholder.style.display = 'flex';
-      }
-    });
-  }
-
-  // Обработка кнопки "Наверх" в футере
-  const scrollToTopBtn = document.querySelector('.footer__content-btn');
-  if (scrollToTopBtn) {
-    scrollToTopBtn.addEventListener('click', function (e) {
+  // Обработка кнопок "Наверх" в футере
+  const scrollToTopBtns = document.querySelectorAll('.footer__content-btn');
+  scrollToTopBtns.forEach(btn => {
+    btn.addEventListener('click', function (e) {
       e.preventDefault();
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
     });
-  }
+  });
 
   // Инициализация попапа с историями
   const storiesPopup = document.querySelector('.stories-popup');
@@ -151,13 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Показываем попап
     storiesPopup.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+    document.documentElement.classList.add('popup-open'); // Добавляем класс для блокировки скролла
   }
 
   // Функция для закрытия попапа
   function closeStoriesPopup() {
     storiesPopup.classList.remove('active');
-    document.body.style.overflow = ''; // Разблокируем скролл страницы
+    document.documentElement.classList.remove('popup-open'); // Удаляем класс для блокировки скролла
   }
 
   // Обработчик клика по кнопке закрытия
@@ -178,19 +125,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const storiesData = [];
     const storyCards = document.querySelectorAll('.stories__card');
 
-    storyCards.forEach((card) => {
+    storyCards.forEach((card, index) => {
       const badge = card.querySelector('.stories__card-badge');
       const badgeType = card.querySelector('.stories__card-badge-type');
-      const image = card.querySelector('.stories__card-image img');
       const title = card.querySelector('.stories__card-title');
       const text = card.querySelector('.stories__card-text');
+      
+      // Получаем фоновое изображение из стилей карточки
+      const computedStyle = window.getComputedStyle(card);
+      const backgroundImage = computedStyle.backgroundImage;
+      
+      // Извлекаем URL изображения из строки background-image
+      let imageUrl = '';
+      if (backgroundImage && backgroundImage !== 'none') {
+        // Извлекаем URL из строки вида url("path/to/image.jpg")
+        const match = backgroundImage.match(/url\(['"]?(.*?)['"]?\)/);
+        if (match && match[1]) {
+          imageUrl = match[1];
+          
+          // Если путь относительный, преобразуем его в абсолютный
+          if (imageUrl.startsWith('../') || imageUrl.startsWith('./') || !imageUrl.startsWith('http')) {
+            // Получаем базовый URL текущей страницы
+            const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            
+            // Преобразуем относительный путь в абсолютный
+            if (imageUrl.startsWith('../')) {
+              // Удаляем '../' и добавляем базовый URL
+              imageUrl = baseUrl + imageUrl.substring(3);
+            } else if (imageUrl.startsWith('./')) {
+              // Удаляем './' и добавляем базовый URL
+              imageUrl = baseUrl + imageUrl.substring(2);
+            } else {
+              // Просто добавляем базовый URL
+              imageUrl = baseUrl + imageUrl;
+            }
+          }
+        }
+      }
+      
+      // Если не удалось получить URL из стилей, используем дефолтное изображение
+      if (!imageUrl) {
+        imageUrl = require('../assets/image_card-1.jpg');
+      }
 
       storiesData.push({
         badge: badge
           ? badge.textContent.replace(badgeType ? badgeType.textContent : '', '').trim()
           : '',
         badgeType: badgeType ? badgeType.textContent : '',
-        image: image ? image.src : '',
+        image: imageUrl,
         title: title ? title.textContent : '',
         text: text ? text.textContent : '',
       });
@@ -220,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
           <div class="stories-popup__card-content">
-            <div class="stories-popup__card-title">История любви ${index + 1}</div>
+            <div class="stories-popup__card-title">История любви</div>
             <div class="stories-popup__card-text">${story.text}</div>
           </div>
         </div>
@@ -234,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => {
         // Используем index для добавления дополнительной функциональности
         button.setAttribute('data-opened', 'true');
-        button.textContent = `История ${index + 1}`;
         openStoriesPopup(index);
       });
     });
