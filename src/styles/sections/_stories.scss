@@ -238,12 +238,14 @@
       gap: 16px;
       max-width: 520px;
       position: relative;
+      margin-bottom: 140px;
       
       @include responsive(tablet) {
         order: 1;
       }
       
       @include responsive(mobile) {
+        margin-bottom: 0;
         gap: 12px;
       }
     }
@@ -300,7 +302,10 @@
       }
 
       &-img {
-        max-width: 240px;
+        max-width: 380px;
+        @include responsive(mobile) { 
+          max-width: 240px;
+        }
       }
     }
   }

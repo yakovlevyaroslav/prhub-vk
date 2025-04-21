@@ -163,6 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       
+      // Если количество файлов валидно, удаляем класс input-error и form-error
+      const fileWrapper = photoInput.closest('.history__form-file-wrapper');
+      const formItem = fileWrapper.closest('.history__form-item');
+      if (fileWrapper) {
+        fileWrapper.classList.remove('input-error');
+      }
+      if (formItem) {
+        const formError = formItem.querySelector('.form-error');
+        if (formError) {
+          formError.remove();
+        }
+      }
+      
       // Проверяем размер и тип файлов
       let hasInvalidFile = false;
       
@@ -222,6 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
               if (filePreview.children.length === 0) {
                 filePlaceholder.style.display = 'flex';
                 validationState.photo = false;
+                // Удаляем класс input-error, так как поле пустое
+                const fileWrapper = photoInput.closest('.history__form-file-wrapper');
+                if (fileWrapper) {
+                  fileWrapper.classList.remove('input-error');
+                }
               }
             });
             
