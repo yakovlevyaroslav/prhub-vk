@@ -1,20 +1,10 @@
 /**
  * Обработчик формы истории
  * Включает валидацию полей и отправку формы
- *
- * API для отправки данных:
- * - Метод: POST
- * - URL: Хранится в константе VK_URL
- * - Формат данных: FormData (multipart/form-data)
- * - Поля формы: name, meet, story, email, phone, vklink, photos (файлы)
  */
 
 // Импортируем библиотеку IMask для создания масок ввода
 import IMask from 'imask';
-
-// URL API для отправки данных с формы
-const VK_URL =
-  'https://pastebin.mvk.com/d0yyvQVnBQBTuTUWYKFx3cVI1xWOpOIncm2fCqOh59vGFjrdSxtqQlXeLIIUHyH6u8Z8AGpbpzyWANru.nginx';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Получаем элементы формы
@@ -402,38 +392,15 @@ document.addEventListener('DOMContentLoaded', () => {
     submitButton.textContent = 'Отправка...';
 
     try {
-      // Отправляем данные на сервер, используя VK_URL
-      const response = await fetch(VK_URL, {
-        method: 'POST',
-        body: formData,
-        // Не добавляем заголовок Content-Type, т.к. FormData автоматически установит правильный заголовок с boundary
-      });
+      // Здесь должен быть ваш код для отправки данных на сервер
+      // Например:
+      // const response = await fetch('/api/submit-story', {
+      //   method: 'POST',
+      //   body: formData
+      // });
 
-      // Проверяем статус ответа
-      if (!response.ok) {
-        let errorMessage = 'Произошла ошибка при отправке формы';
-
-        try {
-          // Пытаемся получить детали ошибки из тела ответа
-          const errorData = await response.json();
-          errorMessage = errorData.message || errorData.error || errorMessage;
-        } catch (e) {
-          // Если не удалось распарсить JSON, используем статус и текст ответа
-          errorMessage = `Ошибка: ${response.status} ${response.statusText}`;
-        }
-
-        throw new Error(errorMessage);
-      }
-
-      let responseData;
-      try {
-        // Пытаемся прочитать JSON из ответа
-        responseData = await response.json();
-        console.log('Успешный ответ от сервера:', responseData);
-      } catch (e) {
-        // Если ответ не в формате JSON, считаем что всё равно успешно
-        console.log('Ответ сервера не в формате JSON:', await response.text());
-      }
+      // Имитация отправки (замените на реальный код)
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       // Показываем сообщение об успешной отправке
       showSuccessMessage();
@@ -450,7 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       // Показываем сообщение об ошибке
       showErrorMessage(error.message || 'Произошла ошибка при отправке формы');
-      console.error('Ошибка отправки формы:', error);
     } finally {
       // Включаем кнопку отправки
       submitButton.disabled = false;
@@ -460,28 +426,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Функция для отображения сообщения об успешной отправке
   const showSuccessMessage = () => {
-    // Удаляем предыдущие сообщения об успехе или ошибке, если они есть
-    const existingMessages = form.querySelectorAll('.form-success-message, .form-error-message');
-    existingMessages.forEach((msg) => msg.remove());
-
     const messageElement = document.createElement('div');
     messageElement.className = 'form-success-message';
     messageElement.textContent = 'Ваша история успешно отправлена!';
 
-    // Добавляем стили для сообщения об успехе
-    messageElement.style.backgroundColor = '#e6f7e6';
-    messageElement.style.color = '#1e7e34';
-    messageElement.style.padding = '15px';
-    messageElement.style.margin = '15px 0';
-    messageElement.style.borderRadius = '5px';
-    messageElement.style.borderLeft = '5px solid #1e7e34';
-    messageElement.style.fontWeight = 'bold';
-    messageElement.style.textAlign = 'center';
-
     form.appendChild(messageElement);
-
-    // Прокручиваем к сообщению
-    messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     // Удаляем сообщение через 5 секунд
     setTimeout(() => {
@@ -491,28 +440,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Функция для отображения сообщения об ошибке
   const showErrorMessage = (message) => {
-    // Удаляем предыдущие сообщения об успехе или ошибке, если они есть
-    const existingMessages = form.querySelectorAll('.form-success-message, .form-error-message');
-    existingMessages.forEach((msg) => msg.remove());
-
     const messageElement = document.createElement('div');
     messageElement.className = 'form-error-message';
     messageElement.textContent = message || 'Произошла ошибка при отправке формы';
 
-    // Добавляем стили для сообщения об ошибке
-    messageElement.style.backgroundColor = '#f8d7da';
-    messageElement.style.color = '#721c24';
-    messageElement.style.padding = '15px';
-    messageElement.style.margin = '15px 0';
-    messageElement.style.borderRadius = '5px';
-    messageElement.style.borderLeft = '5px solid #721c24';
-    messageElement.style.fontWeight = 'bold';
-    messageElement.style.textAlign = 'center';
-
     form.appendChild(messageElement);
-
-    // Прокручиваем к сообщению
-    messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     // Удаляем сообщение через 5 секунд
     setTimeout(() => {

@@ -1,14 +1,16 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
+:root {
+  --thumb-slide-width: 82px;
+}
+
 .stories {
   width: 100%;
-  background-color: #000000;
   padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
 
   @include responsive(mobile) {
     padding-top: 60px;
@@ -19,12 +21,130 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    position: relative;
+    overflow: visible;
 
     &-title {
-      margin-bottom: 48px;
-      
+      position: relative;
+      max-width: 655px;
+      width: 100%;
+      margin: 0 auto;
+      height: 165px;
+      margin-bottom: 70px;
+      overflow: visible;
+
       @include responsive(mobile) {
-        margin-bottom: 24px;
+        max-width: 285px;
+        height: 105px;
+        margin-bottom: 50px;
+      }
+
+      &-item {
+        font-weight: normal;
+        line-height: 1;
+        background-color: white;
+        box-shadow: 4px 4px 64px 0px rgba(255, 38, 176, 0.25);
+        padding: 16px 32px;
+        border-radius: 50px;
+        position: absolute;
+        white-space: nowrap;
+        font-size: 48px;
+
+        @include responsive(mobile) {
+          font-size: 24px;
+          padding: 12px 24px;
+        }
+
+        &_1 {
+          left: 0;
+          top: 0;
+          transform: rotate(-1deg);
+          z-index: 10;
+          max-width: 474px;
+          width: 100%;
+          height: 90px;
+
+          @include responsive(mobile) {
+            max-width: 255px;
+            height: 55px;
+          }
+        }
+
+        &_2 {
+          right: 0;
+          bottom: 0;
+          transform: rotate(-3deg);
+          z-index: 9;
+          max-width: 384px;
+          width: 100%;
+          height: 90px;
+
+          @include responsive(mobile) {
+            max-width: 210px;
+            height: 55px;
+          }
+        }
+      }
+
+      &-icon {
+        position: absolute;
+        object-fit: contain;
+        object-position: center;
+        z-index: 11;
+        min-width: 64px;
+        width: 64px;
+        height: 77px;
+
+        @include responsive(mobile) {
+          min-width: 40px;
+          width: 40px;
+          height: 48px;
+        }
+
+        &_1 {
+          right: 140px;
+          top: 20px;
+
+          @include responsive(mobile) {
+            right: 10px;
+            top: 15px;
+          }
+        }
+
+        &_2 {
+          transform: rotate(-5deg);
+          left: 80px;
+          bottom: 30px;
+
+          @include responsive(mobile) {
+            left: 45px;
+            bottom: 25px;
+          }
+        }
+
+        &_3 {
+          transform: rotate(4deg);
+          right: 100px;
+          bottom: -40px;
+
+          @include responsive(mobile) {
+            right: 40px;
+            bottom: -25px;
+          }
+        }
+
+        &_4 {
+          min-width: 820px;
+          height: 230px;
+          z-index: 1;
+          left: 50%;
+          top: 40%;
+          transform: translate(-50%, -50%);
+
+          @include responsive(mobile) {
+            display: none;
+          }
+        }
       }
     }
   }
@@ -37,6 +157,64 @@
     
     @include responsive(tablet) {
       margin-bottom: 120px;
+    }
+
+    &-previews {
+      width: 100%;
+      margin-bottom: 20px;
+
+      @include responsive(mobile) {
+        display: none;
+      }
+      
+      &-card {
+        &-active {
+          transform: rotate(-10deg) !important;
+          opacity: 1 !important;
+        }
+      }
+
+      &_cards {
+        width: 100%;
+        overflow: hidden;
+        padding: 0 10px;
+
+        .swiper-wrapper {
+          padding: 10px 0;
+        }
+        
+        .swiper-slide {
+          height: 80px;
+          width: var(--thumb-slide-width) !important;
+          flex-shrink: 0;
+          cursor: pointer;
+          border-radius: 12px;
+          overflow: hidden;
+          opacity: 0.6;
+          transition: 0.3s ease;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+      }
+    }
+
+    &-stories {
+      position: relative;
+      width: 100%;
+
+      .stories__slider-button_next,
+      .stories__slider-button_prev {
+        display: none;
+  
+        @include responsive(mobile) {
+          display: block;
+        }
+      }
     }
   }
 
@@ -56,65 +234,95 @@
 
   &__card {
     display: flex !important;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 8px;
-    padding: 10px 10px 24px 10px;
-    background-color: black;
-    border-radius: 24px;
+    align-items: stretch;
+    gap: 24px;
+    padding: 32px;
+    background-color: white;
+    border-radius: 32px;
     overflow: hidden;
     height: 100%;
     min-height: 450px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    width: 100%;
 
-    &:nth-child(1) {
-      background-image: url('../../assets/image_card-1.jpg');
-    }
 
-    &:nth-child(2) {
-      background-image: url('../../assets/image_card-2.jpg');
-    }
-
-    &:nth-child(3) {
-      background-image: url('../../assets/image_card-1.jpg');
-    }
-
-    &:nth-child(4) {
-      background-image: url('../../assets/image_card-2.jpg');
-    }
-
-    &:nth-child(5) {
-      background-image: url('../../assets/image_card-1.jpg');
-    }
-
-    &:nth-child(6) {
-      background-image: url('../../assets/image_card-2.jpg');
-    }
-    
     @include responsive(mobile) {
-      padding: 12px;
+      padding: 10px;
+      border-radius: 24px;
+      flex-direction: column;
+      gap: 16px;
+      min-height: auto;
+    }
+
+    &-span {
+      @include responsive(mobile) {
+        display: none;
+      }
+    }
+
+    &-image {
+      max-width: 400px;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 20px;
+      position: relative;
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex-shrink: 0;
+      gap: 12px;
+      padding: 16px;
+
+      @include responsive(mobile) {
+        max-width: none;
+        height: 280px;
+        padding: 12px;
+      }
+
+      &-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+    }
+
+    &-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+      z-index: 2;
+      opacity: .5;
     }
     
     &-title {
-      font-size: 24px;
+      z-index: 4;
+      font-size: 32px;
+      margin-bottom: 0;
       font-weight: bold;
-      z-index: inherit;
-      margin-top: auto;
-      
+      line-height: 1;
+
       @include responsive(mobile) {
-        font-size: 18px;
+        font-size: 24px;
       }
     }
     
     &-badge {
-      font-size: 10px;
+      font-size: 12px;
       display: flex;
-      flex-direction: column;
-      align-items: baseline;
+      align-items: center;
       gap: 6px;
       line-height: 1;
+      z-index: 5;
       
       @include responsive(mobile) {
         font-size: 14px;
@@ -129,7 +337,6 @@
         background: linear-gradient(90deg, #FF26B0 0%, #FF7ACB 100%);
         border-radius: 50px;
         padding: 8px;
-        margin-left: 6px;
         line-height: 1;
         
         @include responsive(mobile) {
@@ -138,25 +345,57 @@
         }
       }
     }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      @include responsive(mobile) {
+        gap: 16px;
+        height: 100%;
+      }
+
+      &-title {
+        font-size: 32px;
+        font-weight: bold;
+      }
+    }
     
     &-text {
-      font-size: 12px;
-      line-height: 1.2;
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 2.8em; /* 2 строки * 1.4 (line-height) */
-      
-      @include responsive(mobile) {
+
+      p {
+        font-size: 16px;
+        line-height: 1.2;
         margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
 
     &-btn {
       width: 100%;
+      margin-top: auto;
+
+      &-category {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        margin-left: 12px;
+
+        &-icon {
+          @include responsive(mobile) {
+            display: none;
+          }
+        }
+      }
     }
   }
 
@@ -175,15 +414,12 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    display: none;
     
     @include responsive(desktop) {
       top: calc(100% + 16px);
+      display: block;
     }
-    
-    // @include responsive(mobile) {
-    //   width: 36px;
-    //   height: 36px;
-    // }
     
     &.swiper-button-disabled {
       opacity: 0;
@@ -214,346 +450,4 @@
       right: calc(50% - 16px);
     }
   }
-
-  &__collections {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 80px;
-    width: 100%;
-    overflow: hidden;
-    
-    @include responsive(tablet) {
-      flex-direction: column;
-      gap: 40px;
-    }
-    
-    @include responsive(mobile) {
-      gap: 24px;
-    }
-
-    &-text {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 520px;
-      position: relative;
-      
-      @include responsive(tablet) {
-        order: 1;
-      }
-      
-      @include responsive(mobile) {
-        gap: 12px;
-      }
-    }
-
-    &-subtitle {
-      font-size: 24px;
-      font-weight: 500;
-      text-align: center;
-      color: $gray-color;
-      
-      @include responsive(mobile) {
-        font-size: 18px;
-      }
-    }
-
-    &-arrow {
-      position: absolute;
-      bottom: -40px;
-      left: -90px;
-      width: 150px;
-      height: 52px;
-      background-image: url('../../assets/icon_arrow-cursive.svg');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      
-      @include responsive(tablet) {
-        display: none;
-      }
-    }
-
-    &-list {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      max-width: 500px;
-      width: 100%;
-    }
-
-    &-item {
-      margin-left: 0;
-      font-size: 16px;
-      line-height: 1.2;
-      padding: 10px;
-    }
-
-    &-image {
-      margin-bottom: -10px;
-      
-      @include responsive(tablet) {
-        order: 2;
-      }
-
-      &-img {
-        max-width: 240px;
-      }
-    }
-  }
-}
-
-// Попап с историями
-.stories-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  
-  &.active {
-    display: flex;
-  }
-  
-  &__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  &__content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 1200px;
-    max-height: 90vh;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  &__close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    z-index: 2;
-    
-    @include responsive(mobile) {
-      top: -15px;
-      right: 15px;
-      width: 25px;
-      height: 25px;
-    }
-    
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 32px;
-      height: 2px;
-      background-color: white;
-      
-      @include responsive(mobile) {
-        width: 32px;
-      }
-    }
-    
-    &::before {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-    
-    &::after {
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-  }
-  
-  &__slider {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    max-width: 1000px;
-    
-    .swiper-slide {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      padding: 40px;
-      
-      @include responsive(mobile) {
-        flex-direction: column;
-        gap: 20px;
-        padding: 10px;
-      }
-    }
-    
-    &-button_next,
-    &-button_prev {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      z-index: 10;
-      cursor: pointer;
-      transition: opacity 0.3s;
-      background-image: url('../../assets/icon_arrow-slider-bubble.svg');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      
-      @include responsive(mobile) {
-        width: 36px;
-        height: 36px;
-        display: none;
-      }
-      
-      &.swiper-button-disabled {
-        opacity: 0;
-        pointer-events: none;
-      }
-    }
-
-    &-button_prev {
-      left: 20px;
-      transform: translateY(-50%) rotate(180deg);
-      
-      @include responsive(mobile) {
-        left: 10px;
-      }
-    }
-
-    &-button_next {
-      right: 20px;
-      
-      @include responsive(mobile) {
-        right: 10px;
-      }
-    }
-  }
-  
-  &__card {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-    background-color: white;
-    border-radius: 16px;
-    padding: 32px;
-    width: 100%;
-    max-width: 800px;
-    min-height: 380px;
-
-    @include responsive(notebook) {
-      margin: 0 50px;
-    }
-
-    @include responsive(mobile) {
-      flex-direction: column;
-      max-width: 100%;
-      border-radius: 24px;
-      padding: 10px;
-      margin: 0;
-      gap: 16px;
-    }
-    
-    &-image {
-      width: 320px;
-      height: 320px;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
-
-      @include responsive(mobile) {
-        width: 100%;
-        height: 280px;
-      }
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-    
-    &-content {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    &-info {
-      display: flex;
-      flex-direction: column;
-      align-items: baseline;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      padding: 16px;
-    }
-
-    &-names {
-      font-size: 24px;
-      font-weight: bold;
-      color: white;
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-    
-    &-badge {
-      font-size: 10px;
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-      margin-bottom: 6px;
-      
-      &-type {
-        font-size: 12px;
-        color: #fff;
-        display: block;
-        background: linear-gradient(90deg, #FF7ACB 0%, #FF26B0 100%);
-        border-radius: 50px;
-        padding: 8px;
-        line-height: 1;
-      }
-    }
-    
-    &-title {
-      font-size: 24px;
-      font-weight: bold;
-      color: black;
-    }
-    
-    &-text {
-      font-size: 16px;
-      line-height: 1.6;
-      color: rgba(0, 0, 0, 0.6);
-      flex-grow: 1;
-    }
-  }
-}
-
-// Стили для блокировки прокрутки страницы при открытом попапе
-html.popup-open {
-  overflow: hidden;
 }

@@ -1,7 +1,7 @@
 {
   "name": "prhub-vk",
   "version": "1.0.0",
-  "description": "Landing page for PRHub VK",
+  "description": "VK Знакомства промо страница",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -40,6 +40,7 @@
     "webpack-dev-server": "^5.2.1"
   },
   "dependencies": {
+    "gsap": "^3.12.7",
     "imask": "^7.6.1",
     "swiper": "^11.2.6"
   }

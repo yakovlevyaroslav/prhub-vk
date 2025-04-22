@@ -3,7 +3,6 @@
 
 .download {
   padding: 100px 0 120px;
-  background-color: $pink-color;
 
   @include responsive(mobile) {
     padding: 60px 0;
@@ -39,7 +38,7 @@
 
   &__item {
     padding-bottom: 24px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     width: 100%;
     display: flex;
     align-items: center;
