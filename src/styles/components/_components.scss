@@ -3,21 +3,38 @@
 
 .btn {
   @include button-base;
+  transition: 0.4s ease;
 
-  &-white {
+    &-white {
     background-color: white;
     color: black;
+    box-shadow: 4px 4px 64px 0px rgba(255, 38, 176, 0.15);
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
   }
 
   &-stroke {
     background-color: transparent;
-    border: 1px solid white;
-    color: white;
+    border: 1px solid black;
+    color: black;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
   }
 
   &-blue {
     background-color: $blue-color;
     color: white;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
   }
 }
 
@@ -32,7 +49,7 @@
   font-size: 48px;
   font-weight: bold;
   line-height: 1.2;
-  color: white;
+  color: black;
   text-align: center;
 
   @include responsive(mobile) {
@@ -43,10 +60,101 @@
 .subtitle {
   font-size: 24px;
   line-height: 1.2;
-  color: white;
+  color: black;
   text-align: center;
 
   @include responsive(mobile) {
     font-size: 16px;
+  }
+}
+
+.main {
+  position: relative;
+  overflow: hidden;
+  .gradient-bg {
+    position: absolute;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+
+    &_top-1 {
+      opacity: .5;
+      top: var(--stories-offset, 0);
+      left: 40%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 1000px;
+      height: 1400px;
+      background: radial-gradient(ellipse, rgba(0, 119, 255, 0.8) 0%, rgba(0, 119, 255, 0) 70%);
+    }
+
+    &_top-2 {
+      opacity: .5;
+      top: calc(var(--stories-offset, 0) + 100px);
+      right: 10%;
+      transform: rotate(45deg);
+      width: 1000px;
+      height: 1400px;
+      background: radial-gradient(ellipse, rgba(255, 34, 166, 0.8) 0%, rgba(255, 34, 166, 0) 70%);
+
+      @include responsive(mobile) {
+        top: calc(var(--stories-offset, 0) + 500px);
+        right: -70%;
+      }
+    }
+
+    &_mid-1 {
+      opacity: .5;
+      top: calc(var(--history-offset, 0) + 200px);
+      right: 0%;
+      transform: rotate(45deg);
+      width: 900px;
+      height: 1400px;
+      background: radial-gradient(ellipse, rgba(0, 119, 255, 0.8) 0%, rgba(0, 119, 255, 0) 70%);
+    }
+
+    &_mid-2 {
+      opacity: .5;
+      top: calc(var(--history-offset, 0) + 100px);
+      left: 10%;
+      transform: rotate(45deg);
+      width: 700px;
+      height: 1100px;
+      background: radial-gradient(ellipse, rgba(255, 34, 166, 0.8) 0%, rgba(255, 34, 166, 0) 70%);
+
+      @include responsive(mobile) {
+        width: 500px;
+        height: 800px;
+        top: calc(var(--history-offset, 0) + 1100px);
+      }
+    }
+
+    &_bottom-1 {
+      opacity: .5;
+      top: calc(var(--download-offset, 0) - 100px);
+      left: 0%;
+      transform: rotate(45deg);
+      width: 550px;
+      height: 860px;
+      background: radial-gradient(ellipse, rgba(0, 119, 255, 0.8) 0%, rgba(0, 119, 255, 0) 70%);
+      
+      @include responsive(mobile) {
+        top: var(--download-offset, 0);
+        left: -50%;
+      }
+    }
+
+    &_bottom-2 {
+      opacity: .5;
+      top: calc(var(--download-offset, 0) - 500px);
+      right: 10%;
+      transform: rotate(90deg);
+      width: 900px;
+      height: 2600px;
+      background: radial-gradient(ellipse, rgba(255, 34, 166, 0.8) 0%, rgba(255, 34, 166, 0) 70%);
+
+      @include responsive(mobile) {
+        width: 500px;
+        height: 2400px;
+      }
+    }
   }
 }

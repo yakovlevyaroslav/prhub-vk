@@ -1,23 +1,111 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
+
 .start {
   width: 100%;
   min-height: 100vh;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url('../../assets/bg_main.jpg');
+
+  @include responsive(mobile) {
+    padding: 60px 0;
+    min-height: none;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    height: 100vh;
+
+    @include responsive(mobile) {
+      flex-direction: column;
+      gap: 35px;
+      height: auto;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-img {
+      max-width: 520px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      @include responsive(mobile) {
+        max-width: 300px;
+      }
+    }
+    
+    &-icon {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+
+      @include responsive(mobile) {
+        width: 140px;
+        height: 140px;
+      }
+
+      &_1 {
+        width: 345px;
+        height: 345px;
+        transform: rotate(5deg);
+        top: -70px;
+        right: -155px;
+
+        @include responsive(mobile) {
+          width: 170px;
+          height: 170px;
+          top: -30px;
+          right: -30px;
+        }
+      }
+
+      &_2 {
+        width: 320px;
+        height: 320px;
+        top: 160px;
+        left: -140px;
+
+        @include responsive(mobile) {
+          width: 160px;
+          height: 160px;
+          top: 130px;
+          left: -30px;
+        }
+      }
+
+      &_3 {
+        bottom: -60px;
+        right: -120px;
+
+        @include responsive(mobile) {
+          bottom: -40px;
+          right: -10px;
+        }
+      }
+    }
+    
+  }
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    gap: 16px;
+    gap: 24px;
+    width: 100%;
+    max-width: 560px;
 
     @include responsive(mobile) {
-      gap: 12px;
+      max-width: 300px;
     }
 
     &-top {
@@ -30,12 +118,16 @@
 
       @include responsive(mobile) {
         width: 170px;
-        height: 26px;
+        height: 27px;
       }
     }
 
     &-title {
+      font-size: 32px;
+
       @include responsive(mobile) {
+        font-size: 24px;
+
         br {
           display: none;
         }
@@ -44,11 +136,11 @@
 
     &-subtitle {
       font-weight: 500;
-      line-height: 1;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
+      font-size: 18px;
 
       @include responsive(mobile) {
-        max-width: 280px;
+        font-size: 16px;
         margin-bottom: 0;
       }
     }
@@ -60,7 +152,14 @@
       gap: 16px;
 
       @include responsive(mobile) {
-        display: none;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 300px;
+        width: 100%;
+
+        .btn {
+          width: 100%;
+        }
       }
     }
   }

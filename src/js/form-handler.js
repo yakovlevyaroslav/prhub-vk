@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const meetInput = form.querySelector('#meet');
   const storyInput = form.querySelector('#story');
   const photoInput = form.querySelector('#photo');
+  const emailInput = form.querySelector('#email');
+  const phoneInput = form.querySelector('#phone');
+  const vklinkInput = form.querySelector('#vklink');
   const submitButton = form.querySelector('.history__form-btn');
   const filePreview = form.querySelector('.history__form-file-preview');
   const filePlaceholder = form.querySelector('.history__form-file-placeholder');
@@ -48,12 +51,51 @@ document.addEventListener('DOMContentLoaded', () => {
     overwrite: true
   });
 
+  // Создаем маску для поля телефона в формате +7 (999) 999-99-99
+  const phoneMask = IMask(phoneInput, {
+    mask: '+7 (000) 000-00-00',
+    lazy: false,
+    placeholderChar: '_',
+    // Делаем overwrite true, чтобы новые символы заменяли выделенный текст
+    overwrite: true
+  });
+
+  // Добавляем CSS для стилизации маски как placeholder
+  const maskStyle = document.createElement('style');
+  maskStyle.textContent = `
+    input.imask-placeholder {
+      color: #999 !important;
+      opacity: 0.6;
+    }
+  `;
+  document.head.appendChild(maskStyle);
+
+  // Функция для обновления стилей маски
+  const updatePhoneMaskStyle = () => {
+    if (phoneMask.unmaskedValue === '') {
+      // Если значение пустое, делаем маску бледной
+      phoneInput.classList.add('imask-placeholder');
+    } else {
+      // Если есть значение, используем обычный цвет
+      phoneInput.classList.remove('imask-placeholder');
+    }
+  };
+
+  // Инициализируем стиль при загрузке
+  updatePhoneMaskStyle();
+
+  // Обновляем стиль при вводе
+  phoneInput.addEventListener('input', updatePhoneMaskStyle);
+
   // Объект для хранения состояния валидации
   const validationState = {
     name: false,
     meet: false,
     story: false,
-    photo: false
+    photo: false,
+    email: false,
+    phone: false,
+    vklink: false
   };
 
   // Функция для проверки валидности всех полей
@@ -107,6 +149,44 @@ document.addEventListener('DOMContentLoaded', () => {
       showError(photoInput, 'Добавьте хотя бы одну фотографию');
     } else {
       hideError(photoInput);
+    }
+  };
+
+  // Функция для валидации email
+  const validateEmail = () => {
+    const value = emailInput.value.trim();
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    validationState.email = emailRegex.test(value);
+    
+    if (!validationState.email) {
+      showError(emailInput, 'Введите корректный email');
+    } else {
+      hideError(emailInput);
+    }
+  };
+
+  // Функция для валидации телефона
+  const validatePhone = () => {
+    const value = phoneInput.value.trim();
+    validationState.phone = phoneMask.masked.isComplete;
+    
+    if (!validationState.phone) {
+      showError(phoneInput, 'Введите корректный номер телефона');
+    } else {
+      hideError(phoneInput);
+    }
+  };
+
+  // Функция для валидации ссылки ВКонтакте
+  const validateVkLink = () => {
+    const value = vklinkInput.value.trim();
+    const vkRegex = /^(https?:\/\/)?(www\.)?(vk\.com|vkontakte\.ru)\/.+/i;
+    validationState.vklink = vkRegex.test(value);
+    
+    if (!validationState.vklink) {
+      showError(vklinkInput, 'Введите корректную ссылку на профиль ВКонтакте');
+    } else {
+      hideError(vklinkInput);
     }
   };
 
@@ -289,12 +369,18 @@ document.addEventListener('DOMContentLoaded', () => {
     hideError(meetInput);
     hideError(storyInput);
     hideError(photoInput);
+    hideError(emailInput);
+    hideError(phoneInput);
+    hideError(vklinkInput);
     
     // Проверяем валидность всех полей перед отправкой
     validateName();
     validateMeet();
     validateStory();
     validatePhoto();
+    validateEmail();
+    validatePhone();
+    validateVkLink();
     
     // Если есть ошибки, прерываем отправку
     if (!Object.values(validationState).every(value => value === true)) {
@@ -306,6 +392,9 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('name', nameInput.value.trim());
     formData.append('meet', meetInput.value.trim());
     formData.append('story', storyInput.value.trim());
+    formData.append('email', emailInput.value.trim());
+    formData.append('phone', phoneInput.value.trim());
+    formData.append('vklink', vklinkInput.value.trim());
     
     // Добавляем все файлы
     for (let i = 0; i < photoInput.files.length; i++) {
@@ -345,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } finally {
       // Включаем кнопку отправки
       submitButton.disabled = false;
-      submitButton.textContent = 'Отправить историю';
+      submitButton.textContent = 'Отправить';
     }
   };
 
@@ -380,6 +469,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Добавляем обработчики событий
   console.log('Добавление обработчика события change для photoInput');
   photoInput.addEventListener('change', handleFileChange);
+  
+  // Добавляем обработчики событий для новых полей
+  emailInput.addEventListener('blur', validateEmail);
+  phoneInput.addEventListener('blur', validatePhone);
+  vklinkInput.addEventListener('blur', validateVkLink);
   
   form.addEventListener('submit', handleSubmit);
   
