@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     on: {
       init: function () {
         document.documentElement.style.setProperty('--thumb-slide-width', '82px');
-      }
-    }
+      },
+    },
   });
 
   // Инициализация главного слайдера с карточками
@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     grabCursor: true,
     navigation: {
       nextEl: '.stories__slider-button_next',
-      prevEl: '.stories__slider-button_prev'
+      prevEl: '.stories__slider-button_prev',
     },
     thumbs: {
       swiper: thumbsSlider, // Связываем с верхним слайдером
-      slideThumbActiveClass: 'stories__slider-previews-card-active'
+      slideThumbActiveClass: 'stories__slider-previews-card-active',
     },
     // Удаляем breakpoints для slidesPerView, чтобы всегда был только 1 слайд
     breakpoints: {
@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       981: {
         spaceBetween: 16,
-      }
-    }
+      },
+    },
   });
 
   // Добавляем дополнительную логику для синхронизации активного слайда в thumbs
-  mainSlider.on('slideChange', function() {
+  mainSlider.on('slideChange', function () {
     const activeIndex = mainSlider.realIndex;
     if (thumbsSlider.slides.length > 0 && thumbsSlider.activeIndex !== activeIndex) {
       thumbsSlider.slideTo(activeIndex);
@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const initStoryPopup = () => {
     // Находим все кнопки "Читать полностью"
     const storyButtons = document.querySelectorAll('.stories__card-btn');
-    
+
     if (storyButtons.length > 0) {
       const storiesPopup = document.querySelector('.stories-popup');
       const storiesPopupClose = document.querySelector('.stories-popup__close');
       const storiesPopupSlider = document.querySelector('.stories-popup__slider');
-      
+
       if (storiesPopup && storiesPopupSlider) {
         let popupSwiper = null;
 
@@ -79,12 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
               navigation: {
                 nextEl: '.stories-popup__slider-button_next',
                 prevEl: '.stories-popup__slider-button_prev',
-              }
+              },
             });
           } else {
             popupSwiper.slideTo(index, 0);
           }
-          
+
           // Показываем попап
           storiesPopup.classList.add('active');
           document.documentElement.classList.add('popup-open');
@@ -119,5 +119,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initStoryPopup();
 });
 
-export { };
-  
+export {};

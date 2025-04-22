@@ -45,15 +45,9 @@
     
     &-icon {
       position: absolute;
-      width: 280px;
-      height: 280px;
-
-      @include responsive(mobile) {
-        width: 140px;
-        height: 140px;
-      }
 
       &_1 {
+        min-width: 345px;
         width: 345px;
         height: 345px;
         transform: rotate(5deg);
@@ -61,6 +55,7 @@
         right: -155px;
 
         @include responsive(mobile) {
+          min-width: 170px;
           width: 170px;
           height: 170px;
           top: -30px;
@@ -69,12 +64,14 @@
       }
 
       &_2 {
+        min-width: 320px;
         width: 320px;
         height: 320px;
         top: 160px;
         left: -140px;
 
-        @include responsive(mobile) {
+        @include responsive(mobile)   {
+          min-width: 160px;
           width: 160px;
           height: 160px;
           top: 130px;
@@ -85,8 +82,14 @@
       &_3 {
         bottom: -60px;
         right: -120px;
+        min-width: 280px;
+        width: 280px;
+        height: 280px;
 
         @include responsive(mobile) {
+          min-width: 140px;
+          width: 140px;
+          height: 140px;
           bottom: -40px;
           right: -10px;
         }
@@ -150,9 +153,12 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
+      
+      @include responsive(tablet) {
+        flex-direction: column;
+      }
 
       @include responsive(mobile) {
-        flex-direction: column;
         gap: 12px;
         max-width: 300px;
         width: 100%;

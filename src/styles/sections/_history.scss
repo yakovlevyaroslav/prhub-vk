@@ -13,8 +13,11 @@
     display: flex;
     gap: 60px;
 
-    @include responsive(mobile) {
+    @include responsive(tablet) {
       flex-direction: column;
+    }
+
+    @include responsive(mobile) {
       gap: 32px;
     }
 
@@ -25,7 +28,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
   }
   
@@ -38,6 +40,8 @@
     gap: 24px;
     display: flex;
     flex-direction: column;
+    box-shadow: 4px 4px 64px 0px rgba(255, 38, 176, 0.15);
+
 
     @include responsive(tablet) {
       width: 100%;
@@ -243,15 +247,17 @@
     &-img {
       position: absolute;
       object-fit: cover;
-      width: 430px;
-      height: 430px;
 
       &_1 {
+        min-width: 430px;
+        width: 430px;
+        height: 430px;
         top: -50px;
         right: -130px;
         z-index: 11;
 
         @include responsive(mobile) {
+          min-width: 195px;
           width: 195px;
           height: 195px;
           right: -50px;
@@ -259,6 +265,7 @@
       }
 
       &_2 {
+        min-width: 654px;
         width: 654px;
         height: 654px;
         top: -10px;
@@ -266,6 +273,7 @@
         z-index: 10;
 
         @include responsive(mobile) {
+          min-width: 297px;
           width: 297px;
           height: 297px;
           left: -30px;
@@ -273,6 +281,7 @@
       }
 
       &_3 {
+        min-width: 440px;
         width: 440px;
         height: 440px;
         bottom: 0;
@@ -280,6 +289,7 @@
         z-index: 9;
 
         @include responsive(mobile) {
+          min-width: 200px;
           width: 200px;
           height: 200px;
           bottom: 80px;
